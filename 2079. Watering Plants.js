@@ -19,7 +19,7 @@ var wateringPlants = function (plants, capacity) {
 			// move to refill
 			steps += i + 1;
 			// refill
-			currentCapacity -= plants[i];
+			currentCapacity = capacity;
 			// move back to current plant
 			steps += i + 1;
 		}
@@ -28,5 +28,6 @@ var wateringPlants = function (plants, capacity) {
 	return steps;
 };
 
-console.log(wateringPlants([2, 2, 3, 3], 5));
-console.log(wateringPlants([1, 1, 1, 4, 2, 3], 4));
+// console.log(wateringPlants([2, 2, 3, 3], 5));
+// console.log(wateringPlants([1, 1, 1, 4, 2, 3], 4));
+console.log(wateringPlants([3, 2, 4, 2, 1], 6));
