@@ -21,7 +21,7 @@ function canConstruct(ransomNote: string, magazine: string): boolean {
 			return false;
 		}
 	}
-	// return condition
+
 	return true;
 }
 
