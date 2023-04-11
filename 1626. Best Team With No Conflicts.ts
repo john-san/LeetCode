@@ -4,8 +4,8 @@ function bestTeamScore(scores: number[], ages: number[]): number {
 		score,
 		ages[idx],
 	]);
-	// sort pairs in ascending order of scores
-	pairs = pairs.sort((a, b) => a[0] - b[0]);
+	// sort pairs in ascending order of scores, then ascending order of ages
+	pairs = pairs.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
 	// create arr to hold max scores
 	let maxScores: number[] = pairs.map((pair) => pair[0]);
 
@@ -25,6 +25,7 @@ function bestTeamScore(scores: number[], ages: number[]): number {
 	}
 
 	return Math.max(...maxScores);
+	// TC: O(n^2), SC: O(n)
 }
 
 // console.log(bestTeamScore([1, 3, 5, 10, 15], [1, 2, 3, 4, 5]));
