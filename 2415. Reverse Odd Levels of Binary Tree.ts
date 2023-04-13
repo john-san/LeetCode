@@ -55,3 +55,27 @@ function reverseOddLevels(root: TreeNode | null): TreeNode | null {
 	}
 	return root;
 }
+
+// DFS solution
+// TC: O(n), SC: O(n)
+function reverseOddLevelsDFS(root: TreeNode | null): TreeNode | null {
+	function traverse(
+		node1: TreeNode | null,
+		node2: TreeNode | null,
+		level: number
+	) {
+		if (node1 == null || node2 == null) return;
+
+		if (level % 2 === 1) {
+			let temp = node1.val;
+			node1.val = node2.val;
+			node2.val = temp;
+		}
+		if (node1.left && node2.right) traverse(node1.left, node2.right, level + 1);
+		if (node1.right && node2.left) traverse(node1.right, node2.left, level + 1);
+	}
+
+	// root exists for each traverse call
+	traverse(root!.left, root!.right, 1);
+	return root;
+}
