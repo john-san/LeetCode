@@ -1,3 +1,4 @@
+// TC: O(n), SC: O(n)
 // @ts-ignore
 function runningSum(nums: number[]): number[] {
 	return nums.map((n, i) => nums.slice(0, i + 1).reduce((a, b) => a + b));
