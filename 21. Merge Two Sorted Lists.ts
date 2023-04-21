@@ -8,7 +8,7 @@ class ListNode {
 	}
 }
 
-// TC: O(n), SC: O(1)
+// TC: O(n), SC: O(n)
 // merge two sorted lists
 function mergeTwoLists(
 	list1: ListNode | null,
@@ -61,6 +61,8 @@ console.dir(mergeTwoLists(null, null)); // null
 // create test for one empty list
 console.dir(mergeTwoLists(null, new ListNode())); // [0]
 
+// recursive solution
+// TC: O(n), SC: O(n)
 function recursiveMergeTwoLists(
 	list1: ListNode | null,
 	list2: ListNode | null
@@ -84,3 +86,10 @@ function recursiveMergeTwoLists(
 }
 
 // create tests
+console.dir(recursiveMergeTwoLists(list1, list2)); // [1,1,2,3,4,4]
+
+// create test for two empty lists
+console.dir(recursiveMergeTwoLists(null, null)); // null
+
+// create test for one empty list
+console.dir(recursiveMergeTwoLists(null, new ListNode())); // [0]
