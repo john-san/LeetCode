@@ -8,6 +8,7 @@ class ListNode {
 	}
 }
 
+// TC: O(n), SC: O(1)
 // function reverseList(head: ListNode | null): ListNode | null {
 // 	// iterative solution
 // 	let prev: ListNode | null = null;
@@ -22,6 +23,7 @@ class ListNode {
 
 // }
 
+// TC: O(n) [visiting over every node 1 time], SC: O(n) [Function call stack space]
 //recursive solution
 function reverseList(head: ListNode | null): ListNode | null {
 	if (!head || !head.next) return head
