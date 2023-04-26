@@ -8,6 +8,7 @@ class ListNode {
 	}
 }
 
+// TC: O(n), SC: O(1)
 function middleNode(head: ListNode | null): ListNode | null {
 	if (!head) return null
 	if (!head.next) return head

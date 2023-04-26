@@ -1,42 +1,43 @@
 // Definition for singly-linked list.
 class ListNode {
-	val: number;
-	next: ListNode | null;
+	val: number
+	next: ListNode | null
 	constructor(val?: number, next?: ListNode | null) {
-		this.val = val === undefined ? 0 : val;
-		this.next = next === undefined ? null : next;
+		this.val = val === undefined ? 0 : val
+		this.next = next === undefined ? null : next
 	}
 }
 
+// TC: O(n), SC: O(n)
 function middleNode(head: ListNode | null): ListNode | null {
-	let length = 0;
-	let current: ListNode | null = head;
+	let length = 0
+	let current: ListNode | null = head
 	// iterate through linked list to get length
 	while (current) {
-		current = current.next;
+		current = current.next
 		// increase length
-		length++;
+		length++
 	}
 
 	// reset to beginning
-	current = head;
-	let midpoint = 0;
+	current = head
+	let midpoint = 0
 
 	// if length is even
 	if (length % 2 == 0) {
-		midpoint = Math.floor(length / 2);
+		midpoint = Math.floor(length / 2)
 		for (let i = 0; i < midpoint; i++) {
-			current = current!.next;
+			current = current!.next
 		}
 	} else {
 		// length is odd
-		midpoint = (length - 1) / 2;
+		midpoint = (length - 1) / 2
 		for (let i = 0; i < midpoint; i++) {
-			current = current!.next;
+			current = current!.next
 		}
 	}
 
-	return current;
+	return current
 }
 
 /* alternate solution
