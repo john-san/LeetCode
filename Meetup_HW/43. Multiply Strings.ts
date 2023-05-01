@@ -31,8 +31,8 @@ function multiply(num1: string, num2: string): string {
 }
 
 // test
-console.log(multiply('2', '3')) // "6"
+// console.log(multiply('2', '3')) // "6"
 console.log(multiply('123', '456')) // "56088"
-console.log(multiply('0', '0')) // "0"
-console.log(multiply('123456789', '987654321')) // "121932631112635269"
-console.log(multiply('498828660196', '840477629533')) // "419254329864656431168468"
+// console.log(multiply('0', '0')) // "0"
+// console.log(multiply('123456789', '987654321')) // "121932631112635269"
+// console.log(multiply('498828660196', '840477629533')) // "419254329864656431168468"
