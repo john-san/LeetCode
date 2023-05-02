@@ -15,9 +15,11 @@ function multiply(num1: string, num2: string): string {
 			const product = Number(num1[i]) * Number(num2[j])
 			// calculate sum of previous carryover and current product
 			const sum = result[i + j + 1] + product
-			// store the last digit of sum in result
+
+			// store the remainder in current digit. think of `1's place`
 			result[i + j + 1] = sum % 10
-			// add carryover to previous digit
+
+			// add carryover to "previous" digit. think of `10's place`
 			result[i + j] += Math.floor(sum / 10)
 		}
 	}
