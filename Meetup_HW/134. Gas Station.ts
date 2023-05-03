@@ -1,24 +1,30 @@
 // TC: O(n), SC: O(1)
 function canCompleteCircuit(gas: number[], cost: number[]): number {
-	//  try every station as a starting point
-	for (let i = 0; i < gas.length; i++) {
-		//  if we can't even reach the next station, skip this station
-		if (gas[i] < cost[i]) continue
-
-		//  otherwise, try to complete the circuit
-		let tank = gas[i] - cost[i]
-		//  if we can't reach the next station, stop
-		let j = i + 1
-		while (tank >= 0 && j % gas.length !== i) {
-			tank += gas[j % gas.length] - cost[j % gas.length]
-			j++
-		}
-		//  if we can reach the next station, return the starting point
-		if (tank >= 0) return i
+	// edge cases
+	if (
+		gas.length === 0 ||
+		cost.length === 0 ||
+		gas.length !== cost.length ||
+		gas.reduce((a, b) => a + b) < cost.reduce((a, b) => a + b)
+	) {
+		return -1
 	}
 
-	//  if we can't reach the next station from any starting point, return -1
-	return -1
+	let tank = 0
+	let result = 0
+
+	// do 1 loop to find the start point
+	for (let i = 0; i < gas.length; i++) {
+		// for each station, add gas and minus cost
+		tank += gas[i] - cost[i]
+
+		// if tank < 0, reset tank and start point
+		if (tank < 0) {
+			tank = 0
+			result = i + 1
+		}
+	}
+	return result
 }
 
 // test
