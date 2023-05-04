@@ -1,22 +1,21 @@
 // TC: O(n), SC: O(1)
 function canCompleteCircuit(gas: number[], cost: number[]): number {
 	// edge cases
-	if (
-		gas.length === 0 ||
-		cost.length === 0 ||
-		gas.length !== cost.length ||
-		gas.reduce((a, b) => a + b) < cost.reduce((a, b) => a + b)
-	) {
+	if (gas.length === 0 || cost.length === 0 || gas.length !== cost.length) {
 		return -1
 	}
 
 	let tank = 0
 	let result = 0
+	let runningTotal = 0
 
 	// do 1 loop to find the start point
 	for (let i = 0; i < gas.length; i++) {
 		// for each station, add gas and minus cost
 		tank += gas[i] - cost[i]
+
+		// running total lets us know if there is a solution
+		runningTotal += gas[i] - cost[i]
 
 		// if tank < 0, reset tank and start point
 		if (tank < 0) {
@@ -24,7 +23,8 @@ function canCompleteCircuit(gas: number[], cost: number[]): number {
 			result = i + 1
 		}
 	}
-	return result
+
+	return runningTotal < 0 ? -1 : result
 }
 
 // test
