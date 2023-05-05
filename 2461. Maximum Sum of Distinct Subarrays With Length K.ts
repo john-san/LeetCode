@@ -1,29 +1,44 @@
 function maximumSubarraySum(nums: number[], k: number): number {
-	// edge case
-	if (nums.length === 0 || k <= 0) {
-		return 0
+	const subArr = nums.slice(0, k)
+	const subArrMap = new Map<number, number>()
+
+	function addToMap(n: number, map: Map<number, number>) {
+		const currentCount = map.get(n)
+		currentCount ? map.set(n, currentCount + 1) : map.set(n, 1)
 	}
-
-	let result = 0
-	let max = 0
-
-	let temp = []
-
-	// do 1 loop to find the max
-	for (let i = 0; i < nums.length; i++) {
-		// if i < k, add to result
-		if (i < k) {
-			result += nums[i]
-			max = result
-		} else {
-			// sliding window
-			// if i >= k, add to result and minus nums[i - k]
-			result += nums[i] - nums[i - k]
-			max = Math.max(max, result)
+	function decrementFromMap(n: number, map: Map<number, number>) {
+		const currentCount = map.get(n)
+		if (currentCount === 1) {
+			map.delete(n)
+		} else if (currentCount) {
+			map.set(n, currentCount - 1)
 		}
 	}
 
-	return max
+	let currentSum = subArr.reduce((a, b) => a + b, 0)
+	for (const n of subArr) {
+		addToMap(n, subArrMap)
+	}
+
+	let result = currentSum
+	for (let i = k; i < nums.length; i++) {
+		if (subArrMap.size === k) {
+			result = Math.max(result, currentSum)
+		}
+		const firstItem = nums[i - k]
+		currentSum -= firstItem
+		currentSum += nums[i]
+		if (subArrMap.has(firstItem)) {
+			decrementFromMap(firstItem, subArrMap)
+		}
+		addToMap(nums[i], subArrMap)
+	}
+
+	if (subArrMap.size === k) {
+		result = Math.max(result, currentSum)
+	}
+
+	return result
 }
 
 // test
