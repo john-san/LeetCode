@@ -1,46 +1,32 @@
 function maximumSubarraySum(nums: number[], k: number): number {
-	const subArr = nums.slice(0, k)
-	const subArrMap = new Map<number, number>()
+	const subArr: number[] = nums.slice(0, k)
+	const subArrSet = new Set(subArr)
+	let currentSum = Array.from(subArrSet).reduce((a, b) => a + b, 0)
+	let result = subArrSet.size > 1 ? currentSum : 0
 
-	function addToMap(n: number, map: Map<number, number>) {
-		const currentCount = map.get(n)
-		currentCount ? map.set(n, currentCount + 1) : map.set(n, 1)
-	}
-	function decrementFromMap(n: number, map: Map<number, number>) {
-		const currentCount = map.get(n)
-		if (currentCount === 1) {
-			map.delete(n)
-		} else if (currentCount) {
-			map.set(n, currentCount - 1)
-		}
-	}
-
-	let currentSum = subArr.reduce((a, b) => a + b, 0)
-	for (const n of subArr) {
-		addToMap(n, subArrMap)
-	}
-
-	let result = currentSum
 	for (let i = k; i < nums.length; i++) {
-		if (subArrMap.size === k) {
+		const firstItem = nums[i - k]
+		const lastItem = nums[i]
+		if (subArrSet.has(firstItem)) {
+			subArrSet.delete(firstItem)
+			currentSum -= firstItem
+		}
+		if (subArrSet.has(lastItem) == false) {
+			subArrSet.add(lastItem)
+			currentSum += lastItem
+		}
+
+		if (subArrSet.size === k) {
 			result = Math.max(result, currentSum)
 		}
-		const firstItem = nums[i - k]
-		currentSum -= firstItem
-		currentSum += nums[i]
-		if (subArrMap.has(firstItem)) {
-			decrementFromMap(firstItem, subArrMap)
-		}
-		addToMap(nums[i], subArrMap)
-	}
-
-	if (subArrMap.size === k) {
-		result = Math.max(result, currentSum)
 	}
 
 	return result
 }
 
 // test
-console.log(maximumSubarraySum([1, 2, 3, 4, 5], 3)) // 12
-console.log(maximumSubarraySum([1, 2, 3, 4, 5], 2)) // 9
+console.log(maximumSubarraySum([1, 5, 4, 2, 9, 9, 9], 3)) // 15
+console.log(maximumSubarraySum([4, 4, 4], 3)) // 0
+console.log(maximumSubarraySum([1, 1, 1, 7, 8, 9], 3)) // 24
+// FAILED
+console.log(maximumSubarraySum([9, 9, 9, 1, 2, 3], 3)) // 12
