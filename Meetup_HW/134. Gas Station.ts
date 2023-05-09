@@ -1,10 +1,5 @@
 // TC: O(n), SC: O(1)
 function canCompleteCircuit(gas: number[], cost: number[]): number {
-	// edge cases
-	if (gas.length === 0 || cost.length === 0 || gas.length !== cost.length) {
-		return -1
-	}
-
 	let tank = 0
 	let result = 0
 	let runningTotal = 0

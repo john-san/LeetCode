@@ -1,5 +1,4 @@
 // TC: O(number of candidates^max depth), SC: O(target value / min value in candidates array)
-// beats 54.50% in terms of runtime, 46.2% in terms of memory
 /*
 function combinationSum(candidates: number[], target: number): number[][] {
 	const result: number[][] = []
@@ -31,7 +30,6 @@ function combinationSum(candidates: number[], target: number): number[][] {
 }
 */
 
-// beats 71.9% in terms of runtime, 44.55% in terms of memory
 function combinationSum(candidates: number[], target: number): number[][] {
 	const result: number[][] = []
 
@@ -44,7 +42,7 @@ function combinationSum(candidates: number[], target: number): number[][] {
 	function dfs(path: number[], sum: number, last: number) {
 		// if sum is equal to target, we found a valid combo
 		if (sum == target) {
-			result.push(path)
+			result.push([...path])
 			return
 		}
 
