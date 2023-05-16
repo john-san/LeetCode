@@ -40,27 +40,27 @@ function sumEvenGrandparent(root: TreeNode | null): number {
 	return sum
 }
 
-function iterativeSumGrandParent(root: TreeNode | null): number {
-	let sum = 0
-	const queue: Array<[TreeNode | null, TreeNode | null, TreeNode | null]> = []
+// function iterativeSumGrandParent(root: TreeNode | null): number {
+// 	let sum = 0
+// 	const queue: Array<[TreeNode | null, TreeNode | null, TreeNode | null]> = []
 
-	queue.push([root, null, null])
+// 	queue.push([root, null, null])
 
-	while (queue.length) {
-		const [node, parent, grandParent] = queue.shift()
+// 	while (queue.length) {
+// 		const [node, parent, grandParent] = queue.shift()
 
-		if (grandParent && grandParent.val % 2 === 0) {
-			sum += node.val
-		}
+// 		if (grandParent && grandParent.val % 2 === 0) {
+// 			sum += node.val
+// 		}
 
-		if (node.left) {
-			queue.push([node.left, node, parent])
-		}
+// 		if (node.left) {
+// 			queue.push([node.left, node, parent])
+// 		}
 
-		if (node.right) {
-			queue.push([node.right, node, parent])
-		}
-	}
+// 		if (node.right) {
+// 			queue.push([node.right, node, parent])
+// 		}
+// 	}
 
-	return sum
-}
+// 	return sum
+// }
