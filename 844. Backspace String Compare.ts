@@ -29,14 +29,22 @@ function backspaceCompare(s: string, t: string): boolean {
 	return stackS.join('') === stackT.join('')
 }
 
+// TC: O(n + m), SC: O(1)
 function twoPointersBackspaceCompare(s: string, t: string): boolean {
-	function getNextValidIndex(str: string, idx: number) {
+	// helper function to get next valid index. accepts string and current index
+	// returns next valid index
+	function getNextValidIndex(str: string, idx: number): number {
 		let backspaceCount = 0
+
+		// loop backwards by decrementing idx. will typically break out of loop and provide valid index.
 		while (idx >= 0) {
+			// if #, increment backspaceCount
 			if (str[idx] === '#') {
 				backspaceCount++
+				// if backspaceCount > 0, continue
 			} else if (backspaceCount > 0) {
 				backspaceCount--
+				// if backspaceCount === 0, break and return valid idx
 			} else {
 				break
 			}
@@ -54,11 +62,12 @@ function twoPointersBackspaceCompare(s: string, t: string): boolean {
 
 		// if both are valid
 		if (idxS >= 0 && idxT >= 0) {
+			// if values are not equal, return false
 			if (s[idxS] !== t[idxT]) {
 				return false
 			}
 		} else {
-			// if one is valid and the other is not
+			// if one idx is valid but the other is not, return false.
 			if (idxS >= 0 || idxT >= 0) {
 				return false
 			}
